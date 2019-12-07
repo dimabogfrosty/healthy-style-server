@@ -28,6 +28,11 @@ public class Achievement extends AbstractEntity {
     public Achievement() {
     }
 
+    public Achievement(String name, String image) {
+        this.name = name;
+        this.image = image;
+    }
+
     public String getName() {
         return name;
     }
