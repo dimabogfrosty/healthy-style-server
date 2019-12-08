@@ -1,6 +1,7 @@
 package com.healthy.style.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,13 +9,16 @@ import java.util.List;
 @Table(name = "achievements")
 public class Achievement extends AbstractEntity {
 
-    @Column(name = "achievement_name", length = 30, nullable = false)
+    @Column(name = "achievement_name", nullable = false)
+    @Size(min = 3, max = 30)
     private String name;
 
     @Column(name = "description")
+    @Size(max = 255)
     private String description;
 
     @Column(name = "image_src", nullable = false)
+    @Size(max = 255)
     private String image;
 
     @ManyToMany(cascade = CascadeType.ALL)
@@ -65,13 +69,4 @@ public class Achievement extends AbstractEntity {
         this.users = users;
     }
 
-    @Override
-    public String toString() {
-        return "Achievement{" +
-                "name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", image='" + image + '\'' +
-                ", users=" + users +
-                '}';
-    }
 }

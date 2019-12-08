@@ -75,14 +75,4 @@ public class Record extends AbstractEntity {
         this.user = user;
     }
 
-    @Override
-    public String toString() {
-        return "Record{" +
-                "runDate=" + runDate +
-                ", startTime=" + startTime +
-                ", endTime=" + endTime +
-                ", distance=" + distance +
-                ", user=" + user +
-                '}';
-    }
 }

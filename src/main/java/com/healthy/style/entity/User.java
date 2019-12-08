@@ -1,6 +1,7 @@
 package com.healthy.style.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,22 +10,27 @@ import java.util.List;
 @Table(name = "users")
 public class User extends AbstractEntity {
 
-    @Column(name = "user_name", length = 26, nullable = false)
+    @Column(name = "user_name", nullable = false)
+    @Size(min = 5, max = 26)
     private String username;
 
-    @Column(name = "password", length = 50, nullable = false)
+    @Column(name = "password", nullable = false)
+    @Size(min = 6, max = 50)
     private String password;
 
-    @Column(name = "first_name", length = 15)
+    @Column(name = "first_name")
+    @Size(min = 3, max = 15)
     private String firstName;
 
-    @Column(name = "last_name", length = 20)
+    @Column(name = "last_name")
+    @Size(min = 3, max = 20)
     private String lastName;
 
     @Column(name = "birth_date")
     private LocalDate birthDate;
 
     @Column(name = "email", length = 50, nullable = false, unique = true)
+    @Size(min = 5, max = 50)
     private String email;
 
     @Column(name = "gender")
@@ -127,22 +133,6 @@ public class User extends AbstractEntity {
 
     public void setRecords(List<Record> records) {
         this.records = records;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", birthDate=" + birthDate +
-                ", email='" + email + '\'' +
-                ", gender=" + gender +
-                ", roles=" + roles +
-                ", achievements=" + achievements +
-                ", records=" + records +
-                '}';
     }
 
     public enum Gender {MALE, FEMALE}
