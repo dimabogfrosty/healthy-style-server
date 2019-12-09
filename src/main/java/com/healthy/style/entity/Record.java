@@ -27,12 +27,11 @@ public class Record extends AbstractEntity {
     public Record() {
     }
 
-    public Record(LocalDate runDate, LocalTime startTime, LocalTime endTime, Double distance, User user) {
+    public Record(LocalDate runDate, LocalTime startTime, LocalTime endTime, Double distance) {
         this.runDate = runDate;
         this.startTime = startTime;
         this.endTime = endTime;
         this.distance = distance;
-        this.user = user;
     }
 
     public LocalDate getRunDate() {
