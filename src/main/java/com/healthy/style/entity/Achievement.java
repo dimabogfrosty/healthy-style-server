@@ -9,7 +9,7 @@ import java.util.List;
 @Table(name = "achievements")
 public class Achievement extends AbstractEntity {
 
-    @Column(name = "achievement_name", nullable = false)
+    @Column(name = "achievement_name", nullable = false, unique = true)
     @Size(min = 3, max = 30)
     private String name;
 
