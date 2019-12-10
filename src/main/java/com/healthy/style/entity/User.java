@@ -46,6 +46,22 @@ public class User extends AbstractEntity {
     @OneToMany(mappedBy = "user")
     private List<Record> records = new ArrayList<>();
 
+    public enum Gender {
+        MALE("Male"),
+        FEMALE("Female");
+
+        private String gender;
+
+        Gender(String gender) {
+            this.gender = gender;
+        }
+
+        @Override
+        public String toString() {
+            return gender;
+        }
+    }
+
     public User() {
     }
 
@@ -135,5 +151,4 @@ public class User extends AbstractEntity {
         this.records = records;
     }
 
-    public enum Gender {MALE, FEMALE}
 }
