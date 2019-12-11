@@ -4,6 +4,7 @@ plugins {
 
 apply plugin: 'java'
 apply plugin: 'io.spring.dependency-management'
+apply plugin: 'jacoco'
 
 group 'com.healthy.style'
 version '1.0.0'
