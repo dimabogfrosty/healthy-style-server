@@ -58,10 +58,11 @@ public class RecordRepositoryTest {
         record2.setUser(user);
         entityManager.persistAndFlush(record2);
 
-        record3 = new Record(
-                LocalDate.of(2019, DECEMBER, 15),
-                LocalTime.of(15, 24, 0),
-                LocalTime.of(17, 58, 0), 3.5D);
+        record3 = new Record();
+        record3.setRunDate(LocalDate.of(2019, DECEMBER, 15));
+        record3.setStartTime(LocalTime.of(15, 24, 0));
+        record3.setEndTime(LocalTime.of(17, 58, 0));
+        record3.setDistance(3.5D);
         record3.setUser(user);
         entityManager.persistAndFlush(record3);
 

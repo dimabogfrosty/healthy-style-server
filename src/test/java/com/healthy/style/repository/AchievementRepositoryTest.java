@@ -47,7 +47,10 @@ public class AchievementRepositoryTest {
         achievementGood.setUsers(new ArrayList<>(singletonList(userDina)));
         entityManager.persistAndFlush(achievementGood);
 
-        achievementGreat = new Achievement("Well", "image.png");
+        achievementGreat = new Achievement();
+        achievementGreat.setName("Well");
+        achievementGreat.setDescription("It's good!");
+        achievementGreat.setImage("image.png");
         achievementGreat.setUsers(new ArrayList<>(asList(userDina, userVlad)));
         entityManager.persistAndFlush(achievementGreat);
 
@@ -63,6 +66,7 @@ public class AchievementRepositoryTest {
         Achievement actualAchievement = achievementRepository.findByName(achievementGood.getName());
 
         assertThat(actualAchievement.getName(), is(achievementGood.getName()));
+        assertThat(actualAchievement.getImage(), is(achievementGood.getImage()));
     }
 
     @Test

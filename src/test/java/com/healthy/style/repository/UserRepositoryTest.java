@@ -112,6 +112,9 @@ public class UserRepositoryTest {
         User actualUser = userRepository.findByUsername(userDina.getUsername());
 
         assertThat(actualUser.getUsername(), is(userDina.getUsername()));
+        assertThat(actualUser.getFirstName(), is(userDina.getFirstName()));
+        assertThat(actualUser.getLastName(), is(userDina.getLastName()));
+        assertThat(actualUser.getBirthDate(), is(userDina.getBirthDate()));
     }
 
     @Test
@@ -126,7 +129,7 @@ public class UserRepositoryTest {
         List<User> users = userRepository.findUsersByGender(MALE);
 
         assertThat(users, hasItems(userVlad));
-        assertThat(users.get(0).getGender(), is(MALE));
+        assertThat(users.get(0).getGender().toString(), is(MALE.toString()));
     }
 
     @Test
@@ -152,6 +155,17 @@ public class UserRepositoryTest {
         userRepository.saveAndFlush(user);
 
         assertThat(userRepository.count(), is(3L));
+    }
+
+    @Test
+    public void whenCreateUserWithId_thenCreatedUserWithId() {
+        User user = new User("userrito", "1231231231", "user@user.com");
+        user.setId(3L);
+
+        User actualUser = userRepository.saveAndFlush(user);
+
+        assertThat(userRepository.count(), is(3L));
+        assertThat(actualUser.getId(), is(user.getId()));
     }
 
     @Test
@@ -205,6 +219,16 @@ public class UserRepositoryTest {
 
         assertThat(userRepository.count(), is(2L));
         assertThat(actualUser.getPassword(), is(userDina.getPassword()));
+    }
+
+    @Test
+    public void whenUpdateUserEmail_thenUpdatedUserEmail() {
+        userDina.setEmail("jacoco@email.com");
+
+        User actualUser = userRepository.saveAndFlush(userDina);
+
+        assertThat(userRepository.count(), is(2L));
+        assertThat(actualUser.getEmail(), is(userDina.getEmail()));
     }
 
     @Test
