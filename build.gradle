@@ -30,3 +30,15 @@ java {
 test {
     useJUnit()
 }
+
+jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            limit {
+                minimum = 0.7
+            }
+        }
+    }
+}
+
+project.tasks['check'].dependsOn 'jacocoTestReport'
