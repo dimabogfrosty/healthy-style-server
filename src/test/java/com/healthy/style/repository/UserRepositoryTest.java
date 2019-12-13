@@ -53,11 +53,16 @@ public class UserRepositoryTest {
         userDina.setLastName("Evgeni");
         userDina.setBirthDate(LocalDate.of(2000, MAY, 20));
         userDina.setGender(FEMALE);
+        userDina.setWeight(58.6);
+        userDina.setHeight(160);
+
         userVlad = new User("vladis", "vvvvvvvv", "vlad@email.com");
         userVlad.setFirstName("Vlad");
         userVlad.setLastName("Kovalok");
         userVlad.setBirthDate(LocalDate.of(1999, APRIL, 24));
         userVlad.setGender(MALE);
+        userVlad.setWeight(70.4);
+        userVlad.setHeight(180);
 
         record1 = new Record(
                 LocalDate.of(2019, DECEMBER, 1),
@@ -122,6 +127,8 @@ public class UserRepositoryTest {
         User actualUser = userRepository.findByEmail(userVlad.getEmail());
 
         assertThat(actualUser.getEmail(), is(userVlad.getEmail()));
+        assertThat(actualUser.getWeight(), is(userVlad.getWeight()));
+        assertThat(actualUser.getHeight(), is(userVlad.getHeight()));
     }
 
     @Test

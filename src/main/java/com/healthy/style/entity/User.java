@@ -37,6 +37,12 @@ public class User extends AbstractEntity {
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
+    @Column(name = "weight")
+    private Double weight;
+
+    @Column(name = "height")
+    private Integer height;
+
     @ManyToMany(mappedBy = "users")
     private List<Role> roles = new ArrayList<>();
 
@@ -125,6 +131,22 @@ public class User extends AbstractEntity {
 
     public void setGender(Gender gender) {
         this.gender = gender;
+    }
+
+    public Double getWeight() {
+        return weight;
+    }
+
+    public void setWeight(Double weight) {
+        this.weight = weight;
+    }
+
+    public Integer getHeight() {
+        return height;
+    }
+
+    public void setHeight(Integer height) {
+        this.height = height;
     }
 
     public List<Role> getRoles() {
