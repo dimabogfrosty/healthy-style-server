@@ -9,7 +9,7 @@ import javax.persistence.MappedSuperclass;
 abstract class AbstractEntity implements java.io.Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     public Long getId() {
