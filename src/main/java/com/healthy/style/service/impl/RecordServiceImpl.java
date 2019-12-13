@@ -6,11 +6,13 @@ import com.healthy.style.repository.RecordRepository;
 import com.healthy.style.service.RecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
 
 @Service
+@Transactional
 public class RecordServiceImpl implements RecordService {
 
     private RecordRepository recordRepository;
