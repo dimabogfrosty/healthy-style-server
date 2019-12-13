@@ -165,14 +165,6 @@ public class UserRepositoryTest {
     }
 
     @Test
-    public void whenCreateUserWithId_thenCreatedUserWithId() {
-        User user = new User("userrito", "1231231231", "user@user.com");
-        user.setId(3L);
-
-        assertThat(userRepository.count(), is(3L));
-    }
-
-    @Test
     public void whenCreateUserWithRoles_thenCreatedUserWithRoles() {
         User user = new User("userrito", "1231231231", "user@user.com");
         user.setRoles(asList(roleUser, roleAdmin));
