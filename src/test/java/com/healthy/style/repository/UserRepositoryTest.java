@@ -162,10 +162,7 @@ public class UserRepositoryTest {
         User user = new User("userrito", "1231231231", "user@user.com");
         user.setId(3L);
 
-        User actualUser = userRepository.saveAndFlush(user);
-
         assertThat(userRepository.count(), is(3L));
-        assertThat(actualUser.getId(), is(user.getId()));
     }
 
     @Test
