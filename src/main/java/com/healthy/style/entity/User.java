@@ -1,5 +1,7 @@
 package com.healthy.style.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
@@ -44,12 +46,15 @@ public class User extends AbstractEntity {
     private Integer height;
 
     @ManyToMany(mappedBy = "users")
+    @JsonManagedReference
     private List<Role> roles = new ArrayList<>();
 
     @ManyToMany(mappedBy = "users")
+    @JsonManagedReference
     private List<Achievement> achievements = new ArrayList<>();
 
     @OneToMany(mappedBy = "user")
+    @JsonManagedReference
     private List<Record> records = new ArrayList<>();
 
     public enum Gender {

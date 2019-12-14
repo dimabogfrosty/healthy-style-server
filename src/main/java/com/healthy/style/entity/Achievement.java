@@ -1,5 +1,7 @@
 package com.healthy.style.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
@@ -27,6 +29,7 @@ public class Achievement extends AbstractEntity {
             joinColumns = {@JoinColumn(name = "achievement_id")},
             inverseJoinColumns = {@JoinColumn(name = "user_id")}
     )
+    @JsonBackReference
     private List<User> users = new ArrayList<>();
 
     public Achievement() {
