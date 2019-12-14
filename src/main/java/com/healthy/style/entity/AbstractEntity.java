@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
-abstract class AbstractEntity implements java.io.Serializable {
+public abstract class AbstractEntity implements java.io.Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
