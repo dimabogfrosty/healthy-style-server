@@ -1,7 +1,5 @@
 package com.healthy.style.entity;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
@@ -10,7 +8,12 @@ import java.util.List;
 
 @Entity
 @Table(name = "users")
-public class User extends AbstractEntity {
+public class User implements java.io.Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
+    @SequenceGenerator(name = "sequenceGenerator", sequenceName = "users_id_seq", allocationSize = 1)
+    private Long id;
 
     @Column(name = "user_name", nullable = false)
     @Size(min = 5, max = 26)
@@ -46,15 +49,12 @@ public class User extends AbstractEntity {
     private Integer height;
 
     @ManyToMany(mappedBy = "users")
-    @JsonManagedReference
     private List<Role> roles = new ArrayList<>();
 
     @ManyToMany(mappedBy = "users")
-    @JsonManagedReference
     private List<Achievement> achievements = new ArrayList<>();
 
     @OneToMany(mappedBy = "user")
-    @JsonManagedReference
     private List<Record> records = new ArrayList<>();
 
     public enum Gender {
@@ -80,6 +80,14 @@ public class User extends AbstractEntity {
         this.username = username;
         this.password = password;
         this.email = email;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getUsername() {

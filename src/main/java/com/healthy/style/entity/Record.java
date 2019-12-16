@@ -8,7 +8,12 @@ import java.time.LocalTime;
 
 @Entity
 @Table(name = "records")
-public class Record extends AbstractEntity {
+public class Record implements java.io.Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
+    @SequenceGenerator(name = "sequenceGenerator", sequenceName = "records_id_seq", allocationSize = 1)
+    private Long id;
 
     @Column(name = "run_date", nullable = false)
     private LocalDate runDate;
@@ -35,6 +40,14 @@ public class Record extends AbstractEntity {
         this.startTime = startTime;
         this.endTime = endTime;
         this.distance = distance;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public LocalDate getRunDate() {

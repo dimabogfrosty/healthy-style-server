@@ -9,7 +9,12 @@ import java.util.List;
 
 @Entity
 @Table(name = "achievements")
-public class Achievement extends AbstractEntity {
+public class Achievement implements java.io.Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
+    @SequenceGenerator(name = "sequenceGenerator", sequenceName = "achievements_id_seq", allocationSize = 1)
+    private Long id;
 
     @Column(name = "achievement_name", nullable = false, unique = true)
     @Size(min = 3, max = 30)
@@ -38,6 +43,14 @@ public class Achievement extends AbstractEntity {
     public Achievement(String name, String image) {
         this.name = name;
         this.image = image;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {

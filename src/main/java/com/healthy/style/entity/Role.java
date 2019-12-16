@@ -9,7 +9,12 @@ import java.util.List;
 
 @Entity
 @Table(name = "roles")
-public class Role extends AbstractEntity {
+public class Role implements java.io.Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
+    @SequenceGenerator(name = "sequenceGenerator", sequenceName = "roles_id_seq", allocationSize = 1)
+    private Long id;
 
     @Column(name = "role_name", nullable = false, unique = true)
     @Size(min = 3, max = 20)
@@ -29,6 +34,14 @@ public class Role extends AbstractEntity {
 
     public Role(String name) {
         this.name = name;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
