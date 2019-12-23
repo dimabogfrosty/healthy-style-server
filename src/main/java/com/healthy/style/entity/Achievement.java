@@ -12,8 +12,8 @@ import java.util.List;
 public class Achievement implements java.io.Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator", sequenceName = "achievements_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "achievements_id_seq")
+    @SequenceGenerator(name = "achievements_id_seq", sequenceName = "achievements_id_seq", allocationSize = 1)
     private Long id;
 
     @Column(name = "achievement_name", nullable = false, unique = true)
@@ -28,11 +28,11 @@ public class Achievement implements java.io.Serializable {
     @Size(max = 255)
     private String image;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     @JoinTable(
             name = "users_achievements",
-            joinColumns = {@JoinColumn(name = "achievement_id")},
-            inverseJoinColumns = {@JoinColumn(name = "user_id")}
+            joinColumns = @JoinColumn(name = "achievement_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
     )
     @JsonBackReference
     private List<User> users = new ArrayList<>();

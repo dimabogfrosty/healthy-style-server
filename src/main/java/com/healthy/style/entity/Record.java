@@ -11,8 +11,8 @@ import java.time.LocalTime;
 public class Record implements java.io.Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator", sequenceName = "records_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "records_id_seq")
+    @SequenceGenerator(name = "records_id_seq", sequenceName = "records_id_seq", allocationSize = 1)
     private Long id;
 
     @Column(name = "run_date", nullable = false)
@@ -27,7 +27,7 @@ public class Record implements java.io.Serializable {
     @Column(name = "distance", nullable = false)
     private Double distance;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "user_id")
     @JsonBackReference
     private User user;
