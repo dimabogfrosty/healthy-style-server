@@ -20,12 +20,7 @@ public class Role implements java.io.Serializable {
     @Size(min = 3, max = 20)
     private String name;
 
-    @ManyToMany
-    @JoinTable(
-            name = "users_roles",
-            joinColumns = @JoinColumn(name = "role_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id")
-    )
+    @ManyToMany(mappedBy = "roles")
     @JsonBackReference
     private List<User> users = new ArrayList<>();
 

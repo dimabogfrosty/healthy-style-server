@@ -28,12 +28,7 @@ public class Achievement implements java.io.Serializable {
     @Size(max = 255)
     private String image;
 
-    @ManyToMany
-    @JoinTable(
-            name = "users_achievements",
-            joinColumns = @JoinColumn(name = "achievement_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id")
-    )
+    @ManyToMany(mappedBy = "achievements")
     @JsonBackReference
     private List<User> users = new ArrayList<>();
 

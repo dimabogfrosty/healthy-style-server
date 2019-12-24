@@ -6,6 +6,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import static javax.persistence.CascadeType.PERSIST;
+
 @Entity
 @Table(name = "users")
 public class User implements java.io.Serializable {
@@ -48,10 +50,20 @@ public class User implements java.io.Serializable {
     @Column(name = "height")
     private Integer height;
 
-    @ManyToMany(mappedBy = "users")
+    @ManyToMany(cascade = {PERSIST})
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
     private List<Role> roles = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "users")
+    @ManyToMany(cascade = {PERSIST})
+    @JoinTable(
+            name = "users_achievements",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "achievement_id")
+    )
     private List<Achievement> achievements = new ArrayList<>();
 
     @OneToMany(mappedBy = "user")
