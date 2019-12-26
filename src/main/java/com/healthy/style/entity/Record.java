@@ -35,7 +35,7 @@ public class Record implements java.io.Serializable {
     public Record() {
     }
 
-    public Record(LocalDate runDate, LocalTime startTime, LocalTime endTime, Double distance) {
+    public Record(final LocalDate runDate, final LocalTime startTime, final LocalTime endTime, final Double distance) {
         this.runDate = runDate;
         this.startTime = startTime;
         this.endTime = endTime;
@@ -46,7 +46,7 @@ public class Record implements java.io.Serializable {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(final Long id) {
         this.id = id;
     }
 
@@ -54,7 +54,7 @@ public class Record implements java.io.Serializable {
         return runDate;
     }
 
-    public void setRunDate(LocalDate runDate) {
+    public void setRunDate(final LocalDate runDate) {
         this.runDate = runDate;
     }
 
@@ -62,7 +62,7 @@ public class Record implements java.io.Serializable {
         return startTime;
     }
 
-    public void setStartTime(LocalTime startTime) {
+    public void setStartTime(final LocalTime startTime) {
         this.startTime = startTime;
     }
 
@@ -70,7 +70,7 @@ public class Record implements java.io.Serializable {
         return endTime;
     }
 
-    public void setEndTime(LocalTime endTime) {
+    public void setEndTime(final LocalTime endTime) {
         this.endTime = endTime;
     }
 
@@ -78,7 +78,7 @@ public class Record implements java.io.Serializable {
         return distance;
     }
 
-    public void setDistance(Double distance) {
+    public void setDistance(final Double distance) {
         this.distance = distance;
     }
 
@@ -86,7 +86,7 @@ public class Record implements java.io.Serializable {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(final User user) {
         this.user = user;
     }
 

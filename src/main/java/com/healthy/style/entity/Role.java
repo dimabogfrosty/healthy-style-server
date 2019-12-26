@@ -27,7 +27,7 @@ public class Role implements java.io.Serializable {
     public Role() {
     }
 
-    public Role(String name) {
+    public Role(final String name) {
         this.name = name;
     }
 
@@ -35,7 +35,7 @@ public class Role implements java.io.Serializable {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(final Long id) {
         this.id = id;
     }
 
@@ -43,7 +43,7 @@ public class Role implements java.io.Serializable {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 
@@ -51,7 +51,7 @@ public class Role implements java.io.Serializable {
         return users;
     }
 
-    public void setUsers(List<User> users) {
+    public void setUsers(final List<User> users) {
         this.users = users;
     }
 

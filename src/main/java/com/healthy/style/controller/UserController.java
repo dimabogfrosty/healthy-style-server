@@ -23,22 +23,22 @@ public class UserController {
     private RecordService recordService;
 
     @Autowired
-    public void setUserService(UserService userService) {
+    public void setUserService(final UserService userService) {
         this.userService = userService;
     }
 
     @Autowired
-    public void setRoleService(RoleService roleService) {
+    public void setRoleService(final RoleService roleService) {
         this.roleService = roleService;
     }
 
     @Autowired
-    public void setAchievementService(AchievementService achievementService) {
+    public void setAchievementService(final AchievementService achievementService) {
         this.achievementService = achievementService;
     }
 
     @Autowired
-    public void setRecordService(RecordService recordService) {
+    public void setRecordService(final RecordService recordService) {
         this.recordService = recordService;
     }
 
@@ -48,37 +48,37 @@ public class UserController {
     }
 
     @GetMapping("/users/{id:\\d+}")
-    public User getUserById(@PathVariable Long id) {
+    public User getUserById(@PathVariable final Long id) {
         return userService.getById(id);
     }
 
     @GetMapping("/users/{id:\\d+}/roles")
-    public List<Role> getRolesByUser(@PathVariable Long id) {
+    public List<Role> getRolesByUser(@PathVariable final Long id) {
         return roleService.getRolesByUser(userService.getById(id));
     }
 
     @GetMapping("/users/{id:\\d+}/achievements")
-    public List<Achievement> getAchievementsByUser(@PathVariable Long id) {
+    public List<Achievement> getAchievementsByUser(@PathVariable final Long id) {
         return achievementService.getAchievementsByUser(userService.getById(id));
     }
 
     @GetMapping("/users/{id:\\d+}/records")
-    public List<Record> getRecordsByUser(@PathVariable Long id) {
+    public List<Record> getRecordsByUser(@PathVariable final Long id) {
         return recordService.getUserRecords(userService.getById(id));
     }
 
     @PostMapping("/users")
-    public User createUser(@RequestBody User user) {
+    public User createUser(@RequestBody final User user) {
         return userService.save(user);
     }
 
     @PutMapping("/users")
-    public User updateUser(@RequestBody User user) {
+    public User updateUser(@RequestBody final User user) {
         return userService.save(user);
     }
 
     @DeleteMapping("/users/{id:\\d+}")
-    public void deleteUser(@PathVariable Long id) {
+    public void deleteUser(@PathVariable final Long id) {
         userService.delete(id);
     }
 

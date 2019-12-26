@@ -19,32 +19,32 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
 
     @Autowired
-    public void setUserRepository(UserRepository userRepository) {
+    public void setUserRepository(final UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
     @Override
-    public User getByUsername(String username) {
+    public User getByUsername(final String username) {
         return userRepository.findByUsername(username);
     }
 
     @Override
-    public User getByEmail(String email) {
+    public User getByEmail(final String email) {
         return userRepository.findByEmail(email);
     }
 
     @Override
-    public List<User> getByGender(Gender gender) {
+    public List<User> getByGender(final Gender gender) {
         return userRepository.findUsersByGender(gender);
     }
 
     @Override
-    public List<User> getUsersByRole(Role role) {
+    public List<User> getUsersByRole(final Role role) {
         return userRepository.findUsersByRoles(role);
     }
 
     @Override
-    public List<User> getUsersByAchievement(Achievement achievement) {
+    public List<User> getUsersByAchievement(final Achievement achievement) {
         return userRepository.findUsersByAchievements(achievement);
     }
 
@@ -54,17 +54,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getById(Long id) {
+    public User getById(final Long id) {
         return userRepository.getOne(id);
     }
 
     @Override
-    public User save(User entity) {
+    public User save(final User entity) {
         return userRepository.saveAndFlush(entity);
     }
 
     @Override
-    public void delete(Long id) {
+    public void delete(final Long id) {
         throw new UnsupportedOperationException("Can't delete user for table!");
     }
 

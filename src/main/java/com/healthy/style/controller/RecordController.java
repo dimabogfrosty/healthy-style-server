@@ -14,7 +14,7 @@ public class RecordController {
     private RecordService recordService;
 
     @Autowired
-    public void setRecordService(RecordService recordService) {
+    public void setRecordService(final RecordService recordService) {
         this.recordService = recordService;
     }
 
@@ -24,22 +24,22 @@ public class RecordController {
     }
 
     @GetMapping("/records/{id:\\d+}")
-    public Record getRecordById(@PathVariable Long id) {
+    public Record getRecordById(@PathVariable final Long id) {
         return recordService.getById(id);
     }
 
     @PostMapping("/records")
-    public Record createRecord(@RequestBody Record record) {
+    public Record createRecord(@RequestBody final Record record) {
         return recordService.save(record);
     }
 
     @PutMapping("/records")
-    public Record updateRecord(@RequestBody Record record) {
+    public Record updateRecord(@RequestBody final Record record) {
         return recordService.save(record);
     }
 
     @DeleteMapping("/records/{id:\\d+}")
-    public void deleteRecord(@PathVariable Long id) {
+    public void deleteRecord(@PathVariable final Long id) {
         recordService.delete(id);
     }
 

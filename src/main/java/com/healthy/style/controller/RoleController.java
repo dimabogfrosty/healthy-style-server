@@ -17,12 +17,12 @@ public class RoleController {
     private UserService userService;
 
     @Autowired
-    public void setRoleService(RoleService roleService) {
+    public void setRoleService(final RoleService roleService) {
         this.roleService = roleService;
     }
 
     @Autowired
-    public void setUserService(UserService userService) {
+    public void setUserService(final UserService userService) {
         this.userService = userService;
     }
 
@@ -32,27 +32,27 @@ public class RoleController {
     }
 
     @GetMapping("/roles/{id:\\d+}")
-    public Role getRoleById(@PathVariable Long id) {
+    public Role getRoleById(@PathVariable final Long id) {
         return roleService.getById(id);
     }
 
     @GetMapping("/roles/{id:\\d+}/users")
-    public List<User> getUsersByRole(@PathVariable Long id) {
+    public List<User> getUsersByRole(@PathVariable final Long id) {
         return userService.getUsersByRole(roleService.getById(id));
     }
 
     @PostMapping("/roles")
-    public Role createRole(@RequestBody Role role) {
+    public Role createRole(@RequestBody final Role role) {
         return roleService.save(role);
     }
 
     @PutMapping("/roles")
-    public Role updateRole(@RequestBody Role role) {
+    public Role updateRole(@RequestBody final Role role) {
         return roleService.save(role);
     }
 
     @DeleteMapping("/roles/{id:\\d+}")
-    public void deleteRole(@PathVariable Long id) {
+    public void deleteRole(@PathVariable final Long id) {
         roleService.delete(id);
     }
 

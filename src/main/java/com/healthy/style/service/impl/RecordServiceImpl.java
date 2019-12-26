@@ -18,22 +18,22 @@ public class RecordServiceImpl implements RecordService {
     private RecordRepository recordRepository;
 
     @Autowired
-    public void setRecordRepository(RecordRepository recordRepository) {
+    public void setRecordRepository(final RecordRepository recordRepository) {
         this.recordRepository = recordRepository;
     }
 
     @Override
-    public List<Record> getUserRecords(User user) {
+    public List<Record> getUserRecords(final User user) {
         return recordRepository.findRecordsByUser(user);
     }
 
     @Override
-    public List<Record> getRecordsBetweenRunDate(LocalDate from, LocalDate to) {
+    public List<Record> getRecordsBetweenRunDate(final LocalDate from, final LocalDate to) {
         return recordRepository.findRecordsByRunDateBetween(from, to);
     }
 
     @Override
-    public List<Record> getSortedRecordsBetweenRunDate(LocalDate from, LocalDate to) {
+    public List<Record> getSortedRecordsBetweenRunDate(final LocalDate from, final LocalDate to) {
         return recordRepository.findRecordsByRunDateBetweenOrderByRunDate(from, to);
     }
 
@@ -43,17 +43,17 @@ public class RecordServiceImpl implements RecordService {
     }
 
     @Override
-    public Record getById(Long id) {
+    public Record getById(final Long id) {
         return recordRepository.getOne(id);
     }
 
     @Override
-    public Record save(Record entity) {
+    public Record save(final Record entity) {
         return recordRepository.saveAndFlush(entity);
     }
 
     @Override
-    public void delete(Long id) {
+    public void delete(final Long id) {
         recordRepository.deleteById(id);
     }
 

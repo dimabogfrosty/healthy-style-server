@@ -17,12 +17,12 @@ public class AchievementController {
     private UserService userService;
 
     @Autowired
-    public void setAchievementService(AchievementService achievementService) {
+    public void setAchievementService(final AchievementService achievementService) {
         this.achievementService = achievementService;
     }
 
     @Autowired
-    public void setUserService(UserService userService) {
+    public void setUserService(final UserService userService) {
         this.userService = userService;
     }
 
@@ -32,27 +32,27 @@ public class AchievementController {
     }
 
     @GetMapping("/achievements/{id:\\d+}")
-    public Achievement getAchievementById(@PathVariable Long id) {
+    public Achievement getAchievementById(@PathVariable final Long id) {
         return achievementService.getById(id);
     }
 
     @GetMapping("/achievements/{id:\\d+}/users")
-    public List<User> getUsersByAchievement(@PathVariable Long id) {
+    public List<User> getUsersByAchievement(@PathVariable final Long id) {
         return userService.getUsersByAchievement(achievementService.getById(id));
     }
 
     @PostMapping("/achievements")
-    public Achievement createAchievement(@RequestBody Achievement achievement) {
+    public Achievement createAchievement(@RequestBody final Achievement achievement) {
         return achievementService.save(achievement);
     }
 
     @PutMapping("/achievements")
-    public Achievement updateAchievement(@RequestBody Achievement achievement) {
+    public Achievement updateAchievement(@RequestBody final Achievement achievement) {
         return achievementService.save(achievement);
     }
 
     @DeleteMapping("/achievements/{id:\\d+}")
-    public void deleteAchievement(@PathVariable Long id) {
+    public void deleteAchievement(@PathVariable final Long id) {
         achievementService.delete(id);
     }
 

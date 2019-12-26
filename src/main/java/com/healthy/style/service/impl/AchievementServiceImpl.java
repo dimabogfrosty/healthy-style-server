@@ -17,17 +17,17 @@ public class AchievementServiceImpl implements AchievementService {
     private AchievementRepository achievementRepository;
 
     @Autowired
-    public void setAchievementRepository(AchievementRepository achievementRepository) {
+    public void setAchievementRepository(final AchievementRepository achievementRepository) {
         this.achievementRepository = achievementRepository;
     }
 
     @Override
-    public Achievement getByName(String name) {
+    public Achievement getByName(final String name) {
         return achievementRepository.findByName(name);
     }
 
     @Override
-    public List<Achievement> getAchievementsByUser(User user) {
+    public List<Achievement> getAchievementsByUser(final User user) {
         return achievementRepository.findAchievementsByUsers(user);
     }
 
@@ -37,17 +37,17 @@ public class AchievementServiceImpl implements AchievementService {
     }
 
     @Override
-    public Achievement getById(Long id) {
+    public Achievement getById(final Long id) {
         return achievementRepository.getOne(id);
     }
 
     @Override
-    public Achievement save(Achievement entity) {
+    public Achievement save(final Achievement entity) {
         return achievementRepository.saveAndFlush(entity);
     }
 
     @Override
-    public void delete(Long id) {
+    public void delete(final Long id) {
         achievementRepository.deleteById(id);
     }
 
