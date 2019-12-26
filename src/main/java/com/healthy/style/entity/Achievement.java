@@ -13,7 +13,8 @@ public class Achievement implements java.io.Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "achievements_id_seq")
-    @SequenceGenerator(name = "achievements_id_seq", sequenceName = "achievements_id_seq", allocationSize = 1)
+    @SequenceGenerator(
+            name = "achievements_id_seq", sequenceName = "achievements_id_seq", allocationSize = 1)
     private Long id;
 
     @Column(name = "achievement_name", nullable = false, unique = true)
@@ -35,7 +36,7 @@ public class Achievement implements java.io.Serializable {
     public Achievement() {
     }
 
-    public Achievement(String name, String image) {
+    public Achievement(final String name, final String image) {
         this.name = name;
         this.image = image;
     }
@@ -44,7 +45,7 @@ public class Achievement implements java.io.Serializable {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(final Long id) {
         this.id = id;
     }
 
@@ -52,7 +53,7 @@ public class Achievement implements java.io.Serializable {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 
@@ -60,7 +61,7 @@ public class Achievement implements java.io.Serializable {
         return description;
     }
 
-    public void setDescription(String description) {
+    public void setDescription(final String description) {
         this.description = description;
     }
 
@@ -68,7 +69,7 @@ public class Achievement implements java.io.Serializable {
         return image;
     }
 
-    public void setImage(String image) {
+    public void setImage(final String image) {
         this.image = image;
     }
 
@@ -76,7 +77,7 @@ public class Achievement implements java.io.Serializable {
         return users;
     }
 
-    public void setUsers(List<User> users) {
+    public void setUsers(final List<User> users) {
         this.users = users;
     }
 
