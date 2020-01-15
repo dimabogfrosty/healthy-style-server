@@ -1,5 +1,7 @@
 package com.healthy.style.entity;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
@@ -8,6 +10,7 @@ import java.util.List;
 
 import static javax.persistence.CascadeType.PERSIST;
 
+@Data
 @Entity
 @Table(name = "users")
 public class User implements java.io.Serializable {
@@ -68,133 +71,9 @@ public class User implements java.io.Serializable {
     @OneToMany(mappedBy = "user")
     private List<Record> records = new ArrayList<>();
 
-    public User(final String username, final String password, final String email) {
-        this.username = username;
-        this.password = password;
-        this.email = email;
-    }
-
-    public User() {
-    }
-
-    public void setId(final Long id) {
-        this.id = id;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setUsername(final String username) {
-        this.username = username;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setPassword(final String password) {
-        this.password = password;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setFirstName(final String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setLastName(final String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setBirthDate(final LocalDate birthDate) {
-        this.birthDate = birthDate;
-    }
-
-    public LocalDate getBirthDate() {
-        return birthDate;
-    }
-
-    public void setEmail(final String email) {
-        this.email = email;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setGender(final Gender gender) {
-        this.gender = gender;
-    }
-
-    public Gender getGender() {
-        return gender;
-    }
-
-    public void setWeight(final Double weight) {
-        this.weight = weight;
-    }
-
-    public Double getWeight() {
-        return weight;
-    }
-
-    public void setHeight(final Integer height) {
-        this.height = height;
-    }
-
-    public Integer getHeight() {
-        return height;
-    }
-
-    public void setRoles(final List<Role> roles) {
-        this.roles = roles;
-    }
-
-    public List<Role> getRoles() {
-        return roles;
-    }
-
-    public void setAchievements(final List<Achievement> achievements) {
-        this.achievements = achievements;
-    }
-
-    public List<Achievement> getAchievements() {
-        return achievements;
-    }
-
-    public void setRecords(final List<Record> records) {
-        this.records = records;
-    }
-
-    public List<Record> getRecords() {
-        return records;
-    }
-
     public enum Gender {
-        MALE("Male"),
-        FEMALE("Female");
-
-        private final String gender;
-
-        Gender(final String gender) {
-            this.gender = gender;
-        }
-
-        @Override
-        public String toString() {
-            return gender;
-        }
+        MALE,
+        FEMALE
     }
 
 }

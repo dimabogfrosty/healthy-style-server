@@ -1,12 +1,14 @@
 package com.healthy.style.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
+@Data
 @Entity
 @Table(name = "achievements")
 public class Achievement implements java.io.Serializable {
@@ -30,53 +32,5 @@ public class Achievement implements java.io.Serializable {
     @ManyToMany(mappedBy = "achievements")
     @JsonBackReference
     private List<User> users = new ArrayList<>();
-
-    public Achievement() {
-    }
-
-    public Achievement(final String name, final String image) {
-        this.name = name;
-        this.image = image;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(final Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(final String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(final String description) {
-        this.description = description;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(final String image) {
-        this.image = image;
-    }
-
-    public List<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(final List<User> users) {
-        this.users = users;
-    }
 
 }

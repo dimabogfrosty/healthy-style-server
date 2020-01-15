@@ -1,11 +1,13 @@
 package com.healthy.style.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import lombok.Data;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+@Data
 @Entity
 @Table(name = "records")
 public class Record implements java.io.Serializable {
@@ -30,63 +32,5 @@ public class Record implements java.io.Serializable {
     @JoinColumn(name = "user_id")
     @JsonBackReference
     private User user;
-
-    public Record() {
-    }
-
-    public Record(final LocalDate runDate, final LocalTime startTime, final LocalTime endTime, final Double distance) {
-        this.runDate = runDate;
-        this.startTime = startTime;
-        this.endTime = endTime;
-        this.distance = distance;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(final Long id) {
-        this.id = id;
-    }
-
-    public LocalDate getRunDate() {
-        return runDate;
-    }
-
-    public void setRunDate(final LocalDate runDate) {
-        this.runDate = runDate;
-    }
-
-    public LocalTime getStartTime() {
-        return startTime;
-    }
-
-    public void setStartTime(final LocalTime startTime) {
-        this.startTime = startTime;
-    }
-
-    public LocalTime getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(final LocalTime endTime) {
-        this.endTime = endTime;
-    }
-
-    public Double getDistance() {
-        return distance;
-    }
-
-    public void setDistance(final Double distance) {
-        this.distance = distance;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(final User user) {
-        this.user = user;
-    }
 
 }
