@@ -12,8 +12,7 @@ import java.util.List;
 public class Role implements java.io.Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "roles_id_seq")
-    @SequenceGenerator(name = "roles_id_seq", sequenceName = "roles_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "role_name", nullable = false, unique = true)

@@ -11,8 +11,7 @@ import java.time.LocalTime;
 public class Record implements java.io.Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "records_id_seq")
-    @SequenceGenerator(name = "records_id_seq", sequenceName = "records_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "run_date", nullable = false)

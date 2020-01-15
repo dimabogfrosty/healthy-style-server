@@ -12,9 +12,7 @@ import java.util.List;
 public class Achievement implements java.io.Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "achievements_id_seq")
-    @SequenceGenerator(
-            name = "achievements_id_seq", sequenceName = "achievements_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "achievement_name", nullable = false, unique = true)
