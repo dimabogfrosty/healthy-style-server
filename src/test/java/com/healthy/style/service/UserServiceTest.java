@@ -42,8 +42,11 @@ public class UserServiceTest {
 
     @Before
     public void setUp() {
-        userDina = new User("dinaa", "dddddd", "dina@email.com");
+        userDina = new User();
         userDina.setId(1L);
+        userDina.setUsername("dinaa");
+        userDina.setPassword("dddddd");
+        userDina.setEmail("dina@email.com");
         userDina.setFirstName("Dina");
         userDina.setLastName("Evgeni");
         userDina.setBirthDate(LocalDate.of(2000, MAY, 20));
@@ -51,16 +54,20 @@ public class UserServiceTest {
         userDina.setWeight(58.6);
         userDina.setHeight(160);
 
-        Record record1 = new Record(
-                LocalDate.of(2019, DECEMBER, 1),
-                LocalTime.of(2, 24, 0),
-                LocalTime.of(3, 58, 0), 2.3D);
+        Record record1 = new Record();
+        record1.setRunDate(LocalDate.of(2019, DECEMBER, 1));
+        record1.setStartTime(LocalTime.of(2, 24, 0));
+        record1.setEndTime(LocalTime.of(3, 58, 0));
+        record1.setDistance(2.3D);
         record1.setUser(userDina);
 
-        roleAdmin = new Role("ADMIN");
+        roleAdmin = new Role();
+        roleAdmin.setName("ADMIN");
         roleAdmin.setUsers(new ArrayList<>(singletonList(userDina)));
 
-        achievementGood = new Achievement("Good", "image.png");
+        achievementGood = new Achievement();
+        achievementGood.setName("Good");
+        achievementGood.setImage("image.png");
         achievementGood.setUsers(new ArrayList<>(singletonList(userDina)));
     }
 

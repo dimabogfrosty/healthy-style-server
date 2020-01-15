@@ -36,15 +36,23 @@ public class RoleServiceTest {
 
     @Before
     public void setUp() {
-        userDina = new User("dinaa", "dddddd", "dina@email.com");
-        User userVlad = new User("vladis", "vvvvvvvv", "vlad@email.com");
+        userDina = new User();
+        userDina.setUsername("dinaa");
+        userDina.setPassword("dddddd");
+        userDina.setEmail("dina@email.com");
+        User userVlad = new User();
+        userVlad.setUsername("vladis");
+        userVlad.setPassword("vvvvvvvv");
+        userVlad.setEmail("vlad@email.com");
 
-        roleAdmin = new Role("ADMIN");
+        roleAdmin = new Role();
         roleAdmin.setId(1L);
+        roleAdmin.setName("ADMIN");
         roleAdmin.setUsers(new ArrayList<>(singletonList(userDina)));
 
-        roleUser = new Role("USER");
+        roleUser = new Role();
         roleUser.setId(2L);
+        roleUser.setName("USER");
         roleUser.setUsers(new ArrayList<>(asList(userDina, userVlad)));
 
         userDina.setRoles(new ArrayList<>(asList(roleAdmin, roleUser)));

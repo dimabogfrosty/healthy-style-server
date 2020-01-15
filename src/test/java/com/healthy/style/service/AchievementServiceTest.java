@@ -36,11 +36,20 @@ public class AchievementServiceTest {
 
     @Before
     public void setUp() {
-        userDina = new User("dinaa", "dddddd", "dina@email.com");
-        User userVlad = new User("vladis", "vvvvvvvv", "vlad@email.com");
+        userDina = new User();
+        userDina.setUsername("dinaa");
+        userDina.setPassword("dddddd");
+        userDina.setEmail("dina@email.com");
 
-        achievementGood = new Achievement("Good", "image.png");
+        User userVlad = new User();
+        userVlad.setUsername("vladis");
+        userVlad.setPassword("vvvvvvvv");
+        userVlad.setEmail("vlad@email.com");
+
+        achievementGood = new Achievement();
         achievementGood.setId(1L);
+        achievementGood.setName("Good");
+        achievementGood.setImage("image.png");
         achievementGood.setUsers(new ArrayList<>(singletonList(userDina)));
 
         achievementGreat = new Achievement();

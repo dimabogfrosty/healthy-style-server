@@ -40,19 +40,24 @@ public class RecordServiceTest {
 
     @Before
     public void setUp() {
-        user = new User("userito", "user123", "user@email.com");
+        user = new User();
+        user.setUsername("userito");
+        user.setPassword("user123");
+        user.setEmail("user@email.com");
 
-        record1 = new Record(
-                LocalDate.of(2019, DECEMBER, 1),
-                LocalTime.of(2, 24, 0),
-                LocalTime.of(3, 58, 0), 2.3D);
+        record1 = new Record();
+        record1.setRunDate(LocalDate.of(2019, DECEMBER, 1));
+        record1.setStartTime(LocalTime.of(2, 24, 0));
+        record1.setEndTime(LocalTime.of(3, 58, 0));
+        record1.setDistance(2.3D);
         record1.setUser(user);
         record1.setId(1L);
 
-        record2 = new Record(
-                LocalDate.of(2019, NOVEMBER, 20),
-                LocalTime.of(5, 20, 0),
-                LocalTime.of(7, 30, 59), 5.4D);
+        record2 = new Record();
+        record2.setRunDate(LocalDate.of(2019, NOVEMBER, 20));
+        record2.setStartTime(LocalTime.of(5, 20, 0));
+        record2.setEndTime(LocalTime.of(7, 30, 59));
+        record2.setDistance(5.4D);
         record2.setUser(user);
         record2.setId(2L);
 
