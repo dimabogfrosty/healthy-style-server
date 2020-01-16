@@ -33,4 +33,8 @@ public class Record implements java.io.Serializable {
     @JsonBackReference
     private User user;
 
+    public LocalTime getRunningTime() {
+        return LocalTime.ofNanoOfDay(endTime.toNanoOfDay() - startTime.toNanoOfDay());
+    }
+
 }
