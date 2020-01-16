@@ -112,10 +112,38 @@
 
         <insert tableName="records">
             <column name="user_id" valueNumeric="1"/>
-            <column name="run_date" valueDate="2019-05-10"/>
-            <column name="start_time" valueDate="10:10:10"/>
-            <column name="end_time" valueDate="11:11:11"/>
-            <column name="distance" valueNumeric="1.3"/>
+            <column name="run_date" valueDate="2019-11-02"/>
+            <column name="start_time" valueDate="06:10:22"/>
+            <column name="end_time" valueDate="06:50:10"/>
+            <column name="distance" valueNumeric="4.4"/>
+        </insert>
+        <insert tableName="records">
+            <column name="user_id" valueNumeric="1"/>
+            <column name="run_date" valueDate="2019-11-05"/>
+            <column name="start_time" valueDate="06:00:22"/>
+            <column name="end_time" valueDate="07:10:05"/>
+            <column name="distance" valueNumeric="6.0"/>
+        </insert>
+        <insert tableName="records">
+            <column name="user_id" valueNumeric="1"/>
+            <column name="run_date" valueDate="2019-11-12"/>
+            <column name="start_time" valueDate="06:05:16"/>
+            <column name="end_time" valueDate="06:40:10"/>
+            <column name="distance" valueNumeric="5.4"/>
+        </insert>
+        <insert tableName="records">
+            <column name="user_id" valueNumeric="1"/>
+            <column name="run_date" valueDate="2019-11-22"/>
+            <column name="start_time" valueDate="05:55:22"/>
+            <column name="end_time" valueDate="06:54:10"/>
+            <column name="distance" valueNumeric="6.1"/>
+        </insert>
+        <insert tableName="records">
+            <column name="user_id" valueNumeric="1"/>
+            <column name="run_date" valueDate="2019-11-25"/>
+            <column name="start_time" valueDate="07:43:22"/>
+            <column name="end_time" valueDate="08:20:10"/>
+            <column name="distance" valueNumeric="5.4"/>
         </insert>
     </changeSet>
 

@@ -4,10 +4,8 @@ import com.healthy.style.entity.Achievement;
 import com.healthy.style.entity.Record;
 import com.healthy.style.entity.Role;
 import com.healthy.style.entity.User;
-import com.healthy.style.service.AchievementService;
-import com.healthy.style.service.RecordService;
-import com.healthy.style.service.RoleService;
-import com.healthy.style.service.UserService;
+import com.healthy.style.report.Report;
+import com.healthy.style.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,6 +19,7 @@ public class UserController {
     private RoleService roleService;
     private AchievementService achievementService;
     private RecordService recordService;
+    private ReportService reportService;
 
     @Autowired
     public void setUserService(final UserService userService) {
@@ -40,6 +39,11 @@ public class UserController {
     @Autowired
     public void setRecordService(final RecordService recordService) {
         this.recordService = recordService;
+    }
+
+    @Autowired
+    public void setReportService(ReportService reportService) {
+        this.reportService = reportService;
     }
 
     @GetMapping("/users")
@@ -65,6 +69,11 @@ public class UserController {
     @GetMapping("/users/{id:\\d+}/records")
     public List<Record> getRecordsByUser(@PathVariable final Long id) {
         return recordService.getUserRecords(userService.getById(id));
+    }
+
+    @GetMapping("/users/{id:\\d+}/report")
+    public Report createUserReport(@PathVariable final Long id) {
+        return reportService.createUserReport(userService.getById(id));
     }
 
     @PostMapping("/users")
