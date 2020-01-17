@@ -4,27 +4,18 @@ import com.healthy.style.entity.Achievement;
 import com.healthy.style.entity.User;
 import com.healthy.style.service.AchievementService;
 import com.healthy.style.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api")
+@RequiredArgsConstructor
 public class AchievementController {
 
-    private AchievementService achievementService;
-    private UserService userService;
-
-    @Autowired
-    public void setAchievementService(final AchievementService achievementService) {
-        this.achievementService = achievementService;
-    }
-
-    @Autowired
-    public void setUserService(final UserService userService) {
-        this.userService = userService;
-    }
+    private final AchievementService achievementService;
+    private final UserService userService;
 
     @GetMapping("/achievements")
     public List<Achievement> getAllAchievements() {

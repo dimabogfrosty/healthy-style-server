@@ -7,7 +7,7 @@ import com.healthy.style.entity.User;
 import com.healthy.style.report.DateReport;
 import com.healthy.style.report.Report;
 import com.healthy.style.service.*;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,38 +18,14 @@ import static org.springframework.format.annotation.DateTimeFormat.ISO.DATE;
 
 @RestController
 @RequestMapping("/api")
+@RequiredArgsConstructor
 public class UserController {
 
-    private UserService userService;
-    private RoleService roleService;
-    private AchievementService achievementService;
-    private RecordService recordService;
-    private ReportService reportService;
-
-    @Autowired
-    public void setUserService(final UserService userService) {
-        this.userService = userService;
-    }
-
-    @Autowired
-    public void setRoleService(final RoleService roleService) {
-        this.roleService = roleService;
-    }
-
-    @Autowired
-    public void setAchievementService(final AchievementService achievementService) {
-        this.achievementService = achievementService;
-    }
-
-    @Autowired
-    public void setRecordService(final RecordService recordService) {
-        this.recordService = recordService;
-    }
-
-    @Autowired
-    public void setReportService(ReportService reportService) {
-        this.reportService = reportService;
-    }
+    private final UserService userService;
+    private final RoleService roleService;
+    private final AchievementService achievementService;
+    private final RecordService recordService;
+    private final ReportService reportService;
 
     @GetMapping("/users")
     public List<User> getAllUsers() {

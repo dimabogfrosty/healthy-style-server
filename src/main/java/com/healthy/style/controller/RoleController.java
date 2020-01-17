@@ -4,27 +4,18 @@ import com.healthy.style.entity.Role;
 import com.healthy.style.entity.User;
 import com.healthy.style.service.RoleService;
 import com.healthy.style.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api")
+@RequiredArgsConstructor
 public class RoleController {
 
-    private RoleService roleService;
-    private UserService userService;
-
-    @Autowired
-    public void setRoleService(final RoleService roleService) {
-        this.roleService = roleService;
-    }
-
-    @Autowired
-    public void setUserService(final UserService userService) {
-        this.userService = userService;
-    }
+    private final RoleService roleService;
+    private final UserService userService;
 
     @GetMapping("/roles")
     public List<Role> getAllRoles() {

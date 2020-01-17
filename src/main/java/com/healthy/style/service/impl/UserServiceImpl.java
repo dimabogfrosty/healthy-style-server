@@ -6,7 +6,7 @@ import com.healthy.style.entity.User;
 import com.healthy.style.entity.User.Gender;
 import com.healthy.style.repository.UserRepository;
 import com.healthy.style.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,14 +14,10 @@ import java.util.List;
 
 @Service
 @Transactional
+@RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
-    private UserRepository userRepository;
-
-    @Autowired
-    public void setUserRepository(final UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+    private final UserRepository userRepository;
 
     @Override
     public User getByUsername(final String username) {

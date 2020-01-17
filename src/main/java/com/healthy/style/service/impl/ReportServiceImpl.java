@@ -7,7 +7,6 @@ import com.healthy.style.repository.RecordRepository;
 import com.healthy.style.service.ReportService;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -20,14 +19,10 @@ import static java.time.temporal.TemporalAdjusters.nextOrSame;
 import static java.time.temporal.TemporalAdjusters.previousOrSame;
 
 @Service
+@RequiredArgsConstructor
 public class ReportServiceImpl implements ReportService {
 
-    private RecordRepository recordRepository;
-
-    @Autowired
-    public void setRecordRepository(RecordRepository recordRepository) {
-        this.recordRepository = recordRepository;
-    }
+    private final RecordRepository recordRepository;
 
     @Override
     public Report createUserReport(Long id) {

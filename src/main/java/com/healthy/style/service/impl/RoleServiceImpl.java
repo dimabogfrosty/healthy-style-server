@@ -4,7 +4,7 @@ import com.healthy.style.entity.Role;
 import com.healthy.style.entity.User;
 import com.healthy.style.repository.RoleRepository;
 import com.healthy.style.service.RoleService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,14 +12,10 @@ import java.util.List;
 
 @Service
 @Transactional
+@RequiredArgsConstructor
 public class RoleServiceImpl implements RoleService {
 
-    private RoleRepository roleRepository;
-
-    @Autowired
-    public void setRoleRepository(final RoleRepository roleRepository) {
-        this.roleRepository = roleRepository;
-    }
+    private final RoleRepository roleRepository;
 
     @Override
     public Role getByName(final String name) {

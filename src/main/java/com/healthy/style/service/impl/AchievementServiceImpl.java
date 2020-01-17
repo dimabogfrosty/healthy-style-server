@@ -4,7 +4,7 @@ import com.healthy.style.entity.Achievement;
 import com.healthy.style.entity.User;
 import com.healthy.style.repository.AchievementRepository;
 import com.healthy.style.service.AchievementService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,14 +12,10 @@ import java.util.List;
 
 @Service
 @Transactional
+@RequiredArgsConstructor
 public class AchievementServiceImpl implements AchievementService {
 
-    private AchievementRepository achievementRepository;
-
-    @Autowired
-    public void setAchievementRepository(final AchievementRepository achievementRepository) {
-        this.achievementRepository = achievementRepository;
-    }
+    private final AchievementRepository achievementRepository;
 
     @Override
     public Achievement getByName(final String name) {

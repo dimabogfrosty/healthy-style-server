@@ -2,21 +2,17 @@ package com.healthy.style.controller;
 
 import com.healthy.style.entity.Record;
 import com.healthy.style.service.RecordService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api")
+@RequiredArgsConstructor
 public class RecordController {
 
-    private RecordService recordService;
-
-    @Autowired
-    public void setRecordService(final RecordService recordService) {
-        this.recordService = recordService;
-    }
+    private final RecordService recordService;
 
     @GetMapping("/records")
     public List<Record> getAllRecords() {

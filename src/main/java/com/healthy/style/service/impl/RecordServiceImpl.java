@@ -3,7 +3,7 @@ package com.healthy.style.service.impl;
 import com.healthy.style.entity.Record;
 import com.healthy.style.repository.RecordRepository;
 import com.healthy.style.service.RecordService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,14 +12,10 @@ import java.util.List;
 
 @Service
 @Transactional
+@RequiredArgsConstructor
 public class RecordServiceImpl implements RecordService {
 
-    private RecordRepository recordRepository;
-
-    @Autowired
-    public void setRecordRepository(final RecordRepository recordRepository) {
-        this.recordRepository = recordRepository;
-    }
+    private final RecordRepository recordRepository;
 
     @Override
     public List<Record> getUserRecords(final Long id) {
