@@ -1,7 +1,6 @@
 package com.healthy.style.repository;
 
 import com.healthy.style.entity.Record;
-import com.healthy.style.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -15,6 +14,8 @@ public interface RecordRepository extends JpaRepository<Record, Long> {
 
     List<Record> findRecordsByRunDateBetweenOrderByRunDate(LocalDate from, LocalDate to);
 
-    List<Record> findRecordsByUser(User user);
+    List<Record> findRecordsByUserIdAndRunDateBetweenOrderByRunDate(Long id, LocalDate from, LocalDate to);
+
+    List<Record> findRecordsByUserIdOrderByRunDate(Long id);
 
 }

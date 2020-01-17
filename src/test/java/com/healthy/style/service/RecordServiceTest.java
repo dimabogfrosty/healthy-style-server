@@ -74,13 +74,13 @@ public class RecordServiceTest {
 
     @Test
     public void whenGetUserRecords_thenReturnRecords() {
-        when(recordRepository.findRecordsByUser(user)).thenReturn(asList(record1, record2, record3));
+        when(recordRepository.findRecordsByUserIdOrderByRunDate(user.getId())).thenReturn(asList(record1, record2, record3));
 
-        List<Record> records = recordService.getUserRecords(user);
+        List<Record> records = recordService.getUserRecords(user.getId());
 
         assertThat(records, hasSize(3));
         assertThat(records, hasItems(record1, record2, record3));
-        verify(recordRepository, times(1)).findRecordsByUser(user);
+        verify(recordRepository, times(1)).findRecordsByUserIdOrderByRunDate(user.getId());
     }
 
     @Test

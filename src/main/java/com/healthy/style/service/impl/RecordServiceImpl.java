@@ -1,7 +1,6 @@
 package com.healthy.style.service.impl;
 
 import com.healthy.style.entity.Record;
-import com.healthy.style.entity.User;
 import com.healthy.style.repository.RecordRepository;
 import com.healthy.style.service.RecordService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +22,8 @@ public class RecordServiceImpl implements RecordService {
     }
 
     @Override
-    public List<Record> getUserRecords(final User user) {
-        return recordRepository.findRecordsByUser(user);
+    public List<Record> getUserRecords(final Long id) {
+        return recordRepository.findRecordsByUserIdOrderByRunDate(id);
     }
 
     @Override

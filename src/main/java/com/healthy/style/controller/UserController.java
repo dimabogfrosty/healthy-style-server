@@ -4,12 +4,17 @@ import com.healthy.style.entity.Achievement;
 import com.healthy.style.entity.Record;
 import com.healthy.style.entity.Role;
 import com.healthy.style.entity.User;
+import com.healthy.style.report.DateReport;
 import com.healthy.style.report.Report;
 import com.healthy.style.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
+
+import static org.springframework.format.annotation.DateTimeFormat.ISO.DATE;
 
 @RestController
 @RequestMapping("/api")
@@ -68,12 +73,24 @@ public class UserController {
 
     @GetMapping("/users/{id:\\d+}/records")
     public List<Record> getRecordsByUser(@PathVariable final Long id) {
-        return recordService.getUserRecords(userService.getById(id));
+        return recordService.getUserRecords(id);
     }
 
     @GetMapping("/users/{id:\\d+}/report")
     public Report createUserReport(@PathVariable final Long id) {
-        return reportService.createUserReport(userService.getById(id));
+        return reportService.createUserReport(id);
+    }
+
+    @GetMapping("/users/{id:\\d+}/datesReport")
+    public Report createUserReportBetweenRunDate(@PathVariable final Long id,
+                                                 @RequestParam @DateTimeFormat(iso = DATE) final LocalDate startDate,
+                                                 @RequestParam @DateTimeFormat(iso = DATE) final LocalDate endDate) {
+        return reportService.createUserReportBetweenRunDate(id, startDate, endDate);
+    }
+
+    @GetMapping("/users/{id:\\d+}/weekReport")
+    public List<DateReport> createUserReportByWeek(@PathVariable final Long id) {
+        return reportService.createUserReportByWeek(id);
     }
 
     @PostMapping("/users")

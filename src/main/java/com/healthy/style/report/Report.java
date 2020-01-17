@@ -1,17 +1,15 @@
 package com.healthy.style.report;
 
 import com.healthy.style.entity.Record;
+import lombok.RequiredArgsConstructor;
 
 import java.time.LocalTime;
 import java.util.List;
 
+@RequiredArgsConstructor
 public class Report {
 
     private final List<Record> records;
-
-    public Report(final List<Record> records) {
-        this.records = records;
-    }
 
     public LocalTime getAverageTime() {
         return LocalTime.ofNanoOfDay(getTotalTime().toNanoOfDay() / records.size());
