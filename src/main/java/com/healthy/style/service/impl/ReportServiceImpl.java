@@ -15,8 +15,7 @@ import java.util.List;
 
 import static java.time.DayOfWeek.MONDAY;
 import static java.time.DayOfWeek.SUNDAY;
-import static java.time.temporal.TemporalAdjusters.nextOrSame;
-import static java.time.temporal.TemporalAdjusters.previousOrSame;
+import static java.time.temporal.TemporalAdjusters.*;
 
 @Service
 @RequiredArgsConstructor
@@ -25,42 +24,66 @@ public class ReportServiceImpl implements ReportService {
     private final RecordRepository recordRepository;
 
     @Override
-    public Report createUserReport(Long id) {
+    public Report createUserReport(final Long id) {
         return new Report(recordRepository.findRecordsByUserIdOrderByRunDate(id));
     }
 
     @Override
-    public Report createUserReportBetweenRunDate(Long id, LocalDate from, LocalDate to) {
+    public Report createUserReportBetweenRunDate(final Long id, final LocalDate from, final LocalDate to) {
         return new Report(recordRepository.findRecordsByUserIdAndRunDateBetweenOrderByRunDate(id, from, to));
     }
 
     @Override
-    public List<DateReport> createUserReportByWeek(Long id) {
+    public List<DateReport> createUserReportByWeek(final Long id) {
+        return getDateReports(id, divideByWeeks(recordRepository.findRecordsByUserIdOrderByRunDate(id)));
+    }
+
+    @Override
+    public List<DateReport> createUserReportByMonth(final Long id) {
+        return getDateReports(id, divideByMonths(recordRepository.findRecordsByUserIdOrderByRunDate(id)));
+    }
+
+    private List<DateReport> getDateReports(final Long id, final List<DayInterval> dayIntervals) {
         List<DateReport> dateReports = new ArrayList<>();
-        List<Week> weeks = divideByWeeks(recordRepository.findRecordsByUserIdOrderByRunDate(id));
-        for (Week week : weeks) {
-            dateReports.add(new DateReport(recordRepository.findRecordsByUserIdAndRunDateBetweenOrderByRunDate(id,
-                    week.getMonday(), week.getSunday()), week.getMonday(), week.getSunday()));
+        List<Record> records;
+        for (DayInterval dayInterval : dayIntervals) {
+            records = recordRepository.findRecordsByUserIdAndRunDateBetweenOrderByRunDate(id,
+                    dayInterval.getStart(),
+                    dayInterval.getEnd());
+            if (!records.isEmpty()) {
+                dateReports.add(new DateReport(records, dayInterval.getStart(), dayInterval.getEnd()));
+            }
         }
         return dateReports;
     }
 
-    private List<Week> divideByWeeks(List<Record> records) {
-        List<Week> weeks = new ArrayList<>();
+    private List<DayInterval> divideByWeeks(final List<Record> records) {
+        List<DayInterval> dayIntervals = new ArrayList<>();
         LocalDate startDay = records.get(0).getRunDate();
         LocalDate endDay = records.get(records.size() - 1).getRunDate();
         while (!endDay.isBefore(startDay.with(previousOrSame(MONDAY)))) {
-            weeks.add(new Week(startDay.with(previousOrSame(MONDAY)), startDay.with(nextOrSame(SUNDAY))));
+            dayIntervals.add(new DayInterval(startDay.with(previousOrSame(MONDAY)), startDay.with(nextOrSame(SUNDAY))));
             startDay = startDay.plusWeeks(1);
         }
-        return weeks;
+        return dayIntervals;
+    }
+
+    private List<DayInterval> divideByMonths(final List<Record> records) {
+        List<DayInterval> dayIntervals = new ArrayList<>();
+        LocalDate startDay = records.get(0).getRunDate();
+        LocalDate endDay = records.get(records.size() - 1).getRunDate();
+        while (!endDay.isBefore(startDay.with(firstDayOfMonth()))) {
+            dayIntervals.add(new DayInterval(startDay.with(firstDayOfMonth()), startDay.with(lastDayOfMonth())));
+            startDay = startDay.plusMonths(1);
+        }
+        return dayIntervals;
     }
 
     @Getter
     @RequiredArgsConstructor
-    private static class Week {
-        private final LocalDate monday;
-        private final LocalDate sunday;
+    private static class DayInterval {
+        private final LocalDate start;
+        private final LocalDate end;
     }
 
 }

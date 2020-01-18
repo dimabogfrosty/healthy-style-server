@@ -14,4 +14,6 @@ public interface ReportService {
 
     List<DateReport> createUserReportByWeek(Long id);
 
+    List<DateReport> createUserReportByMonth(Long id);
+
 }

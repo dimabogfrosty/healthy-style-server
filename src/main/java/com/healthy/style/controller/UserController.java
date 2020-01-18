@@ -69,6 +69,11 @@ public class UserController {
         return reportService.createUserReportByWeek(id);
     }
 
+    @GetMapping("users/{id:\\d+}/monthReport")
+    public List<DateReport> createUserReportByMonth(@PathVariable final Long id) {
+        return reportService.createUserReportByMonth(id);
+    }
+
     @PostMapping("/users")
     public User createUser(@RequestBody final User user) {
         return userService.save(user);
