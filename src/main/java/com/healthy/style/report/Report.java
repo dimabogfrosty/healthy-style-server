@@ -16,20 +16,18 @@ public class Report {
     }
 
     public LocalTime getTotalTime() {
-        long nanoSum = 0;
-        for (Record record : records) {
-            nanoSum += record.getRunningTime().toNanoOfDay();
-        }
+        long nanoSum = records.stream()
+                .map(record -> record.getRunningTime().toNanoOfDay())
+                .reduce(Long::sum)
+                .orElse(0L);
         return LocalTime.ofNanoOfDay(nanoSum);
     }
 
     public LocalTime getMaxTime() {
-        long nanoTime = 0;
-        for (Record record : records) {
-            if (nanoTime < record.getRunningTime().toNanoOfDay()) {
-                nanoTime = record.getRunningTime().toNanoOfDay();
-            }
-        }
+        long nanoTime = records.stream()
+                .map(record -> record.getRunningTime().toNanoOfDay())
+                .max(Long::compareTo)
+                .orElse(0L);
         return LocalTime.ofNanoOfDay(nanoTime);
     }
 
@@ -39,21 +37,18 @@ public class Report {
     }
 
     public double getTotalDistance() {
-        double totalDistance = 0;
-        for (Record record : records) {
-            totalDistance += record.getDistance();
-        }
+        double totalDistance = records.stream()
+                .map(Record::getDistance)
+                .reduce(Double::sum)
+                .orElse(0d);
         return (double) Math.round(totalDistance * 10) / 10;
     }
 
     public double getMaxDistance() {
-        double maxDistance = 0;
-        for (Record record : records) {
-            if (maxDistance < record.getDistance()) {
-                maxDistance = record.getDistance();
-            }
-        }
-        return maxDistance;
+        return records.stream()
+                .map(Record::getDistance)
+                .max(Double::compareTo)
+                .orElse(0d);
     }
 
     public double getAverageSpeed() {
@@ -62,13 +57,9 @@ public class Report {
     }
 
     public double getMaxSpeed() {
-        double maxSpeed = 0;
-        for (Record record : records) {
-            double tempSpeed = record.getDistance() / (record.getRunningTime().toSecondOfDay() / 3600d);
-            if (maxSpeed < tempSpeed) {
-                maxSpeed = tempSpeed;
-            }
-        }
+        double maxSpeed = records.stream()
+                .map(record -> record.getDistance() / (record.getRunningTime().toSecondOfDay() / 3600d))
+                .max(Double::compareTo).orElse(0d);
         return (double) Math.round(maxSpeed * 100) / 100;
     }
 }

@@ -46,14 +46,17 @@ public class ReportServiceImpl implements ReportService {
     private List<DateReport> getDateReports(final Long id, final List<DayInterval> dayIntervals) {
         List<DateReport> dateReports = new ArrayList<>();
         List<Record> records;
+
         for (DayInterval dayInterval : dayIntervals) {
             records = recordRepository.findRecordsByUserIdAndRunDateBetweenOrderByRunDate(id,
                     dayInterval.getStart(),
                     dayInterval.getEnd());
+
             if (!records.isEmpty()) {
                 dateReports.add(new DateReport(records, dayInterval.getStart(), dayInterval.getEnd()));
             }
         }
+
         return dateReports;
     }
 
@@ -61,10 +64,12 @@ public class ReportServiceImpl implements ReportService {
         List<DayInterval> dayIntervals = new ArrayList<>();
         LocalDate startDay = records.get(0).getRunDate();
         LocalDate endDay = records.get(records.size() - 1).getRunDate();
+
         while (!endDay.isBefore(startDay.with(previousOrSame(MONDAY)))) {
             dayIntervals.add(new DayInterval(startDay.with(previousOrSame(MONDAY)), startDay.with(nextOrSame(SUNDAY))));
             startDay = startDay.plusWeeks(1);
         }
+
         return dayIntervals;
     }
 
@@ -72,10 +77,12 @@ public class ReportServiceImpl implements ReportService {
         List<DayInterval> dayIntervals = new ArrayList<>();
         LocalDate startDay = records.get(0).getRunDate();
         LocalDate endDay = records.get(records.size() - 1).getRunDate();
+
         while (!endDay.isBefore(startDay.with(firstDayOfMonth()))) {
             dayIntervals.add(new DayInterval(startDay.with(firstDayOfMonth()), startDay.with(lastDayOfMonth())));
             startDay = startDay.plusMonths(1);
         }
+
         return dayIntervals;
     }
 
