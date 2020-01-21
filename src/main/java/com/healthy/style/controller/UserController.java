@@ -53,15 +53,16 @@ public class UserController {
     }
 
     @GetMapping("/users/{id:\\d+}/report")
-    public Report createUserReport(@PathVariable final Long id) {
-        return reportService.createUserReport(id);
-    }
-
-    @GetMapping("/users/{id:\\d+}/datesReport")
     public Report createUserReportBetweenRunDate(@PathVariable final Long id,
-                                                 @RequestParam @DateTimeFormat(iso = DATE) final LocalDate startDate,
-                                                 @RequestParam @DateTimeFormat(iso = DATE) final LocalDate endDate) {
-        return reportService.createUserReportBetweenRunDate(id, startDate, endDate);
+                                                 @RequestParam(required = false)
+                                                 @DateTimeFormat(iso = DATE) final LocalDate startDate,
+                                                 @RequestParam(required = false)
+                                                 @DateTimeFormat(iso = DATE) final LocalDate endDate) {
+        if (startDate != null && endDate != null) {
+            return reportService.createUserReportBetweenRunDate(id, startDate, endDate);
+        } else {
+            return reportService.createUserReport(id);
+        }
     }
 
     @GetMapping("/users/{id:\\d+}/weekReport")
