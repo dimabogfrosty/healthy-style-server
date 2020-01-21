@@ -61,7 +61,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void delete(final Long id) {
-        throw new UnsupportedOperationException("Can't delete user for table!");
+        userRepository.deleteById(id);
     }
 
 }

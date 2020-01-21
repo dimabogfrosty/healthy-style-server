@@ -25,22 +25,30 @@ public class ReportServiceImpl implements ReportService {
 
     @Override
     public Report createUserReport(final Long id) {
-        return new Report(recordRepository.findRecordsByUserIdOrderByRunDate(id));
+        List<Record> records = recordRepository.findRecordsByUserIdOrderByRunDate(id);
+        if(records.isEmpty()) return null;
+        return new Report(records);
     }
 
     @Override
     public Report createUserReportBetweenRunDate(final Long id, final LocalDate from, final LocalDate to) {
-        return new Report(recordRepository.findRecordsByUserIdAndRunDateBetweenOrderByRunDate(id, from, to));
+        List<Record> records = recordRepository.findRecordsByUserIdAndRunDateBetweenOrderByRunDate(id, from, to);
+        if(records.isEmpty()) return null;
+        return new Report(records);
     }
 
     @Override
     public List<DateReport> createUserReportByWeek(final Long id) {
-        return getDateReports(id, divideByWeeks(recordRepository.findRecordsByUserIdOrderByRunDate(id)));
+        List<Record> records = recordRepository.findRecordsByUserIdOrderByRunDate(id);
+        if(records.isEmpty()) return new ArrayList<>();
+        return getDateReports(id, divideByWeeks(records));
     }
 
     @Override
     public List<DateReport> createUserReportByMonth(final Long id) {
-        return getDateReports(id, divideByMonths(recordRepository.findRecordsByUserIdOrderByRunDate(id)));
+        List<Record> records = recordRepository.findRecordsByUserIdOrderByRunDate(id);
+        if(records.isEmpty()) return new ArrayList<>();
+        return getDateReports(id, divideByMonths(records));
     }
 
     private List<DateReport> getDateReports(final Long id, final List<DayInterval> dayIntervals) {

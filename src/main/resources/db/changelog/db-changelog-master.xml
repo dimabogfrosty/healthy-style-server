@@ -107,7 +107,7 @@
         </createTable>
 
         <addForeignKeyConstraint baseTableName="records" baseColumnNames="user_id"
-                                 constraintName="records_user_id"
+                                 constraintName="records_user_id" onDelete="CASCADE"
                                  referencedTableName="users" referencedColumnNames="id"/>
 
         <insert tableName="records">
@@ -188,7 +188,7 @@
                                  constraintName="users_achievements_user_id"
                                  referencedTableName="users" referencedColumnNames="id"/>
         <addForeignKeyConstraint baseTableName="users_achievements" baseColumnNames="achievement_id"
-                                 constraintName="users_achievements_achievement_id"
+                                 constraintName="users_achievements_achievement_id" onDelete="CASCADE"
                                  referencedTableName="achievements" referencedColumnNames="id"/>
 
         <insert tableName="users_achievements">
