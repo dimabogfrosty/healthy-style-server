@@ -5,6 +5,8 @@ plugins {
 apply plugin: 'java'
 apply plugin: 'io.spring.dependency-management'
 apply plugin: 'jacoco'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
 
 group 'com.healthy.style'
 version '1.0.0'
@@ -36,16 +38,6 @@ java {
 
 test {
     useJUnit()
-}
-
-jacocoTestCoverageVerification {
-    violationRules {
-        rule {
-            limit {
-                minimum = 0.7
-            }
-        }
-    }
 }
 
 project.tasks['check'].dependsOn 'jacocoTestReport'

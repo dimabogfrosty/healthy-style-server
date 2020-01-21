@@ -26,6 +26,8 @@ local.properties
 .settings/
 .loadpath
 .recommenders
+.project
+.classpath
 
 # Gradle
 .gradle
