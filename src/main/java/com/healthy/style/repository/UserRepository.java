@@ -3,19 +3,21 @@ package com.healthy.style.repository;
 import com.healthy.style.entity.Achievement;
 import com.healthy.style.entity.Role;
 import com.healthy.style.entity.User;
+import com.healthy.style.entity.User.Gender;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 
-    User findByUsername(String username);
+    Optional<User> findByUsername(String username);
 
-    User findByEmail(String email);
+    Optional<User> findByEmail(String email);
 
-    List<User> findUsersByGender(User.Gender gender);
+    List<User> findUsersByGender(Gender gender);
 
     List<User> findUsersByRoles(Role role);
 

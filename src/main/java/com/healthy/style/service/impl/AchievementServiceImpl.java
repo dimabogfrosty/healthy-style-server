@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -18,7 +19,7 @@ public class AchievementServiceImpl implements AchievementService {
     private final AchievementRepository achievementRepository;
 
     @Override
-    public Achievement getByName(final String name) {
+    public Optional<Achievement> getByName(final String name) {
         return achievementRepository.findByName(name);
     }
 
@@ -33,8 +34,8 @@ public class AchievementServiceImpl implements AchievementService {
     }
 
     @Override
-    public Achievement getById(final Long id) {
-        return achievementRepository.getOne(id);
+    public Optional<Achievement> getById(final Long id) {
+        return achievementRepository.findById(id);
     }
 
     @Override

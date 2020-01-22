@@ -6,12 +6,13 @@ import com.healthy.style.entity.User;
 import com.healthy.style.entity.User.Gender;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface UserService extends EntityService<User> {
 
-    User getByUsername(String username);
+    Optional<User> getByUsername(String username);
 
-    User getByEmail(String email);
+    Optional<User> getByEmail(String email);
 
     List<User> getByGender(Gender gender);
 

@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -38,8 +39,8 @@ public class RecordServiceImpl implements RecordService {
     }
 
     @Override
-    public Record getById(final Long id) {
-        return recordRepository.getOne(id);
+    public Optional<Record> getById(final Long id) {
+        return recordRepository.findById(id);
     }
 
     @Override

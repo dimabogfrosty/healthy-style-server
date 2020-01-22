@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -18,7 +19,7 @@ public class RoleServiceImpl implements RoleService {
     private final RoleRepository roleRepository;
 
     @Override
-    public Role getByName(final String name) {
+    public Optional<Role> getByName(final String name) {
         return roleRepository.findByName(name);
     }
 
@@ -33,8 +34,8 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public Role getById(final Long id) {
-        return roleRepository.getOne(id);
+    public Optional<Role> getById(final Long id) {
+        return roleRepository.findById(id);
     }
 
     @Override

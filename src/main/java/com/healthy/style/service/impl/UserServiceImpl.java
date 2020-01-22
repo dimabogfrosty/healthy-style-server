@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -20,12 +21,17 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
 
     @Override
-    public User getByUsername(final String username) {
+    public Optional<User> getById(final Long id) {
+        return userRepository.findById(id);
+    }
+
+    @Override
+    public Optional<User> getByUsername(final String username) {
         return userRepository.findByUsername(username);
     }
 
     @Override
-    public User getByEmail(final String email) {
+    public Optional<User> getByEmail(final String email) {
         return userRepository.findByEmail(email);
     }
 
@@ -47,11 +53,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> getAll() {
         return userRepository.findAll();
-    }
-
-    @Override
-    public User getById(final Long id) {
-        return userRepository.getOne(id);
     }
 
     @Override

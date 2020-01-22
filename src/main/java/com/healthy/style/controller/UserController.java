@@ -9,12 +9,19 @@ import com.healthy.style.report.Report;
 import com.healthy.style.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityNotFoundException;
+import javax.validation.Valid;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 import static org.springframework.format.annotation.DateTimeFormat.ISO.DATE;
+import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @RestController
 @RequestMapping("/api")
@@ -33,23 +40,34 @@ public class UserController {
     }
 
     @GetMapping("/users/{id:\\d+}")
-    public User getUserById(@PathVariable final Long id) {
-        return userService.getById(id);
+    public ResponseEntity<?> getUserById(@PathVariable final Long id) {
+        Optional<User> user = userService.getById(id);
+        return user.map(response -> ResponseEntity.ok().body(response))
+                .orElse(new ResponseEntity<>(NOT_FOUND));
     }
 
     @GetMapping("/users/{id:\\d+}/roles")
     public List<Role> getRolesByUser(@PathVariable final Long id) {
-        return roleService.getRolesByUser(userService.getById(id));
+        User user = userService.getById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Entity: " + User.class.getName() +
+                        " with id: " + id + " not found"));
+        return roleService.getRolesByUser(user);
     }
 
     @GetMapping("/users/{id:\\d+}/achievements")
     public List<Achievement> getAchievementsByUser(@PathVariable final Long id) {
-        return achievementService.getAchievementsByUser(userService.getById(id));
+        User user = userService.getById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Entity: " + User.class.getName() +
+                        " with id: " + id + " not found"));
+        return achievementService.getAchievementsByUser(user);
     }
 
     @GetMapping("/users/{id:\\d+}/records")
     public List<Record> getRecordsByUser(@PathVariable final Long id) {
-        return recordService.getUserRecords(id);
+        User user = userService.getById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Entity: " + User.class.getName() +
+                        " with id: " + id + " not found"));
+        return recordService.getUserRecords(user.getId());
     }
 
     @GetMapping("/users/{id:\\d+}/report")
@@ -58,10 +76,14 @@ public class UserController {
                                                  @DateTimeFormat(iso = DATE) final LocalDate startDate,
                                                  @RequestParam(required = false)
                                                  @DateTimeFormat(iso = DATE) final LocalDate endDate) {
+        User user = userService.getById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Entity: " + User.class.getName() +
+                        " with id: " + id + " not found"));
+
         if (startDate != null && endDate != null) {
-            return reportService.createUserReportBetweenRunDate(id, startDate, endDate);
+            return reportService.createUserReportBetweenRunDate(user.getId(), startDate, endDate);
         } else {
-            return reportService.createUserReport(id);
+            return reportService.createUserReport(user.getId());
         }
     }
 
@@ -76,18 +98,21 @@ public class UserController {
     }
 
     @PostMapping("/users")
-    public User createUser(@RequestBody final User user) {
-        return userService.save(user);
+    public ResponseEntity<User> createUser(@Valid @RequestBody final User user) throws URISyntaxException {
+        User savedUser = userService.save(user);
+        return ResponseEntity.created(new URI("/api/users/" + savedUser.getId())).body(savedUser);
     }
 
     @PutMapping("/users")
-    public User updateUser(@RequestBody final User user) {
-        return userService.save(user);
+    public ResponseEntity<User> updateUser(@Valid @RequestBody final User user) {
+        User updatedUser = userService.save(user);
+        return ResponseEntity.ok().body(updatedUser);
     }
 
     @DeleteMapping("/users/{id:\\d+}")
-    public void deleteUser(@PathVariable final Long id) {
+    public ResponseEntity<?> deleteUser(@PathVariable final Long id) {
         userService.delete(id);
+        return ResponseEntity.ok().build();
     }
 
 }

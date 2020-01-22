@@ -3,9 +3,16 @@ package com.healthy.style.controller;
 import com.healthy.style.entity.Record;
 import com.healthy.style.service.RecordService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
+import java.util.Optional;
+
+import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @RestController
 @RequestMapping("/api")
@@ -20,23 +27,28 @@ public class RecordController {
     }
 
     @GetMapping("/records/{id:\\d+}")
-    public Record getRecordById(@PathVariable final Long id) {
-        return recordService.getById(id);
+    public ResponseEntity<?> getRecordById(@PathVariable final Long id) {
+        Optional<Record> record = recordService.getById(id);
+        return record.map(response -> ResponseEntity.ok().body(response))
+                .orElse(new ResponseEntity<>(NOT_FOUND));
     }
 
     @PostMapping("/records")
-    public Record createRecord(@RequestBody final Record record) {
-        return recordService.save(record);
+    public ResponseEntity<Record> createRecord(@Valid @RequestBody final Record record) throws URISyntaxException {
+        Record createdRecord = recordService.save(record);
+        return ResponseEntity.created(new URI("api/records/" + createdRecord.getId())).body(createdRecord);
     }
 
     @PutMapping("/records")
-    public Record updateRecord(@RequestBody final Record record) {
-        return recordService.save(record);
+    public ResponseEntity<Record> updateRecord(@Valid @RequestBody final Record record) {
+        Record updatedRecord = recordService.save(record);
+        return ResponseEntity.ok().body(updatedRecord);
     }
 
     @DeleteMapping("/records/{id:\\d+}")
-    public void deleteRecord(@PathVariable final Long id) {
+    public ResponseEntity<?> deleteRecord(@PathVariable final Long id) {
         recordService.delete(id);
+        return ResponseEntity.ok().build();
     }
 
 }
