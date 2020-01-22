@@ -15,10 +15,10 @@
         </createTable>
 
         <insert tableName="roles">
-            <column name="role_name" value="ADMIN"/>
+            <column name="role_name" value="ROLE_ADMIN"/>
         </insert>
         <insert tableName="roles">
-            <column name="role_name" value="USER"/>
+            <column name="role_name" value="ROLE_USER"/>
         </insert>
     </changeSet>
 
@@ -37,14 +37,19 @@
         </createTable>
 
         <insert tableName="achievements">
-            <column name="achievement_name" value="Good"/>
-            <column name="description" value="Very good"/>
-            <column name="image_src" value="image good"/>
+            <column name="achievement_name" value="1K meters at once"/>
+            <column name="description" value="Do not give up! You can do it!"/>
+            <column name="image_src" value="image.png"/>
         </insert>
         <insert tableName="achievements">
-            <column name="achievement_name" value="Well"/>
-            <column name="description" value="Very well"/>
-            <column name="image_src" value="image well"/>
+            <column name="achievement_name" value="Total 10K meters"/>
+            <column name="description" value="You make a great success! Keep up the good work!"/>
+            <column name="image_src" value="image.png"/>
+        </insert>
+        <insert tableName="achievements">
+            <column name="achievement_name" value="Total 15K meters"/>
+            <column name="description" value="Your body is stronger! Go on!"/>
+            <column name="image_src" value="image.png"/>
         </insert>
     </changeSet>
 
@@ -71,7 +76,6 @@
         </createTable>
 
         <insert tableName="users">
-            <column name="id" valueNumeric="1"/>
             <column name="user_name" value="jcoldsun"/>
             <column name="password" value="123456789"/>
             <column name="first_name" value="dzmitry"/>
@@ -81,6 +85,28 @@
             <column name="gender" value="MALE"/>
             <column name="weight" valueNumeric="70"/>
             <column name="height" valueNumeric="175"/>
+        </insert>
+        <insert tableName="users">
+            <column name="user_name" value="phige"/>
+            <column name="password" value="3123231"/>
+            <column name="first_name" value="Vlad"/>
+            <column name="last_name" value="Kovalok"/>
+            <column name="birth_date" valueDate="1999-04-24"/>
+            <column name="email" value="vlad_kovalok@gmail.com"/>
+            <column name="gender" value="MALE"/>
+            <column name="weight" valueNumeric="69.5"/>
+            <column name="height" valueNumeric="175"/>
+        </insert>
+        <insert tableName="users">
+            <column name="user_name" value="Lolalola"/>
+            <column name="password" value="2332daw43"/>
+            <column name="first_name" value="Nastya"/>
+            <column name="last_name" value="Nater"/>
+            <column name="birth_date" valueDate="2000-01-14"/>
+            <column name="email" value="lola_nastya@gmail.com"/>
+            <column name="gender" value="FEMALE"/>
+            <column name="weight" valueNumeric="58"/>
+            <column name="height" valueNumeric="169"/>
         </insert>
     </changeSet>
 
@@ -145,6 +171,78 @@
             <column name="end_time" valueDate="08:20:10"/>
             <column name="distance" valueNumeric="5.4"/>
         </insert>
+
+        <insert tableName="records">
+            <column name="user_id" valueNumeric="2"/>
+            <column name="run_date" valueDate="2019-11-25"/>
+            <column name="start_time" valueDate="19:10:22"/>
+            <column name="end_time" valueDate="19:50:10"/>
+            <column name="distance" valueNumeric="4.4"/>
+        </insert>
+        <insert tableName="records">
+            <column name="user_id" valueNumeric="2"/>
+            <column name="run_date" valueDate="2019-12-05"/>
+            <column name="start_time" valueDate="20:05:22"/>
+            <column name="end_time" valueDate="21:10:05"/>
+            <column name="distance" valueNumeric="7.0"/>
+        </insert>
+        <insert tableName="records">
+            <column name="user_id" valueNumeric="2"/>
+            <column name="run_date" valueDate="2019-12-07"/>
+            <column name="start_time" valueDate="18:05:16"/>
+            <column name="end_time" valueDate="19:40:10"/>
+            <column name="distance" valueNumeric="5.4"/>
+        </insert>
+        <insert tableName="records">
+            <column name="user_id" valueNumeric="2"/>
+            <column name="run_date" valueDate="2019-12-10"/>
+            <column name="start_time" valueDate="14:55:22"/>
+            <column name="end_time" valueDate="15:54:10"/>
+            <column name="distance" valueNumeric="6.1"/>
+        </insert>
+        <insert tableName="records">
+            <column name="user_id" valueNumeric="2"/>
+            <column name="run_date" valueDate="2019-12-15"/>
+            <column name="start_time" valueDate="15:43:22"/>
+            <column name="end_time" valueDate="18:20:10"/>
+            <column name="distance" valueNumeric="5.4"/>
+        </insert>
+
+        <insert tableName="records">
+            <column name="user_id" valueNumeric="3"/>
+            <column name="run_date" valueDate="2019-12-10"/>
+            <column name="start_time" valueDate="19:10:22"/>
+            <column name="end_time" valueDate="19:50:10"/>
+            <column name="distance" valueNumeric="6.4"/>
+        </insert>
+        <insert tableName="records">
+            <column name="user_id" valueNumeric="3"/>
+            <column name="run_date" valueDate="2019-12-12"/>
+            <column name="start_time" valueDate="20:05:22"/>
+            <column name="end_time" valueDate="21:10:05"/>
+            <column name="distance" valueNumeric="10.0"/>
+        </insert>
+        <insert tableName="records">
+            <column name="user_id" valueNumeric="3"/>
+            <column name="run_date" valueDate="2019-12-07"/>
+            <column name="start_time" valueDate="06:05:16"/>
+            <column name="end_time" valueDate="06:40:10"/>
+            <column name="distance" valueNumeric="4.4"/>
+        </insert>
+        <insert tableName="records">
+            <column name="user_id" valueNumeric="3"/>
+            <column name="run_date" valueDate="2019-12-10"/>
+            <column name="start_time" valueDate="14:55:22"/>
+            <column name="end_time" valueDate="15:54:10"/>
+            <column name="distance" valueNumeric="4.1"/>
+        </insert>
+        <insert tableName="records">
+            <column name="user_id" valueNumeric="3"/>
+            <column name="run_date" valueDate="2019-12-21"/>
+            <column name="start_time" valueDate="07:43:22"/>
+            <column name="end_time" valueDate="08:20:10"/>
+            <column name="distance" valueNumeric="5.4"/>
+        </insert>
     </changeSet>
 
     <changeSet id="users_roles" author="bahaslouski">
@@ -170,6 +268,14 @@
         </insert>
         <insert tableName="users_roles">
             <column name="user_id" valueNumeric="1"/>
+            <column name="role_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="users_roles">
+            <column name="user_id" valueNumeric="2"/>
+            <column name="role_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="users_roles">
+            <column name="user_id" valueNumeric="3"/>
             <column name="role_id" valueNumeric="2"/>
         </insert>
     </changeSet>
@@ -198,6 +304,22 @@
         <insert tableName="users_achievements">
             <column name="user_id" valueNumeric="1"/>
             <column name="achievement_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="users_achievements">
+            <column name="user_id" valueNumeric="1"/>
+            <column name="achievement_id" valueNumeric="3"/>
+        </insert>
+        <insert tableName="users_achievements">
+            <column name="user_id" valueNumeric="2"/>
+            <column name="achievement_id" valueNumeric="1"/>
+        </insert>
+        <insert tableName="users_achievements">
+            <column name="user_id" valueNumeric="2"/>
+            <column name="achievement_id" valueNumeric="2"/>
+        </insert>
+        <insert tableName="users_achievements">
+            <column name="user_id" valueNumeric="3"/>
+            <column name="achievement_id" valueNumeric="1"/>
         </insert>
     </changeSet>
 
