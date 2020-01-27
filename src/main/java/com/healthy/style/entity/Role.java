@@ -25,4 +25,8 @@ public class Role implements java.io.Serializable {
     @JsonBackReference
     private List<User> users = new ArrayList<>();
 
+    public boolean isAdminRole() {
+        return this != null && this.name.equals("ROLE_ADMIN");
+    }
+
 }

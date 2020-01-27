@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 
 import javax.persistence.*;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,16 +17,16 @@ public class Achievement implements java.io.Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "achievement_name", nullable = false, unique = true)
-    @Size(min = 3, max = 30)
+    @Column(name = "achievement_name", unique = true)
+    @NotBlank(message = "Achievement name can't be null")
     private String name;
 
     @Column(name = "description")
-    @Size(max = 255)
+    @NotBlank(message = "Achievement description can't be null")
     private String description;
 
-    @Column(name = "image_src", nullable = false)
-    @Size(max = 255)
+    @Column(name = "image_src")
+    @NotBlank(message = "Achievement image can't be null")
     private String image;
 
     @ManyToMany(mappedBy = "achievements")

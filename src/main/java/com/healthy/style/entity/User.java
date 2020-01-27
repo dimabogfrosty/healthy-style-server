@@ -3,7 +3,7 @@ package com.healthy.style.entity;
 import lombok.Data;
 
 import javax.persistence.*;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,27 +19,27 @@ public class User implements java.io.Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "user_name", nullable = false)
-    @Size(min = 5, max = 26)
+    @Column(name = "user_name", unique = true)
+    @NotBlank(message = "Username can't be blank")
     private String username;
 
-    @Column(name = "password", nullable = false)
-    @Size(min = 6, max = 50)
+    @Column(name = "password")
+    @NotBlank(message = "Password can't be blank")
     private String password;
 
     @Column(name = "first_name")
-    @Size(min = 3, max = 15)
+    @NotBlank(message = "Firstname can't be blank")
     private String firstName;
 
     @Column(name = "last_name")
-    @Size(min = 3, max = 20)
+    @NotBlank(message = "Lastname can't be blank")
     private String lastName;
 
     @Column(name = "birth_date")
     private LocalDate birthDate;
 
-    @Column(name = "email", length = 50, nullable = false, unique = true)
-    @Size(min = 5, max = 50)
+    @Column(name = "email", unique = true)
+    @NotBlank(message = "Email can't be blank")
     private String email;
 
     @Column(name = "gender")
@@ -70,6 +70,21 @@ public class User implements java.io.Serializable {
 
     @OneToMany(mappedBy = "user")
     private List<Record> records = new ArrayList<>();
+
+    public User(User user) {
+        this.username = user.username;
+        this.password = user.password;
+        this.firstName = user.firstName;
+        this.lastName = user.lastName;
+        this.birthDate = user.birthDate;
+        this.email = user.email;
+        this.gender = user.gender;
+        this.weight = user.weight;
+        this.height = user.height;
+        this.roles = user.roles;
+        this.achievements = user.achievements;
+        this.records = user.records;
+    }
 
     public enum Gender {
         MALE,
