@@ -52,7 +52,7 @@ public class User implements java.io.Serializable {
     @Column(name = "height")
     private Integer height;
 
-    @ManyToMany(cascade = {PERSIST})
+    @ManyToMany(cascade = {PERSIST}, fetch = FetchType.EAGER)
     @JoinTable(
             name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id"),
@@ -70,6 +70,10 @@ public class User implements java.io.Serializable {
 
     @OneToMany(mappedBy = "user")
     private List<Record> records = new ArrayList<>();
+    
+    public User() {
+        
+    }
 
     public User(User user) {
         this.username = user.username;

@@ -25,4 +25,9 @@ public class CustomUserDetailsService implements UserDetailsService {
                 .orElseThrow(() -> new UsernameNotFoundException("Could't find user with username " + username));
     }
 
+    public UserDetails loadUserById(Long id) {
+        Optional<User> user = userRepository.findById(id);
+        return user.map(CustomUserDetails::new)
+                .orElseThrow(() -> new UsernameNotFoundException("Could't find user with username " + id));
+    }
 }
