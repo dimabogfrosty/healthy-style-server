@@ -37,4 +37,14 @@ public class Record implements java.io.Serializable {
         return LocalTime.ofNanoOfDay(endTime.toNanoOfDay() - startTime.toNanoOfDay());
     }
 
+    @Override
+    public String toString() {
+        return "Record[" +
+                "id=" + id +
+                ", runDate=" + runDate +
+                ", startTime=" + startTime +
+                ", endTime=" + endTime +
+                ", distance=" + distance +
+                ']';
+    }
 }

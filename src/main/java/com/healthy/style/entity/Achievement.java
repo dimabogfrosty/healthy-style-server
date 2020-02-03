@@ -33,4 +33,8 @@ public class Achievement implements java.io.Serializable {
     @JsonBackReference
     private List<User> users = new ArrayList<>();
 
+    @Override
+    public String toString() {
+        return "Achievement[id = " + id + ", name = " + name + "]";
+    }
 }
