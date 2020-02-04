@@ -14,24 +14,24 @@ public class LogServiceAspect {
 
     @After("com.healthy.style.aspect.CommonJoinPointConfig.serviceGetLayer()")
     public void serviceGetLayerExecution(JoinPoint joinPoint) {
-        log.info("Get Method: '{}' Class: '{}'",
+        log.info("Service Get Method: '{}' Class: '{}'",
                 joinPoint.getSignature(),
-                joinPoint.getThis().toString().split("@")[0]);
+                joinPoint.getSignature().getDeclaringTypeName());
     }
 
     @AfterReturning(value = "com.healthy.style.aspect.CommonJoinPointConfig.serviceSaveLayer()", returning = "result")
     public void serviceSaveLayerExecution(JoinPoint joinPoint, Object result) {
-        log.info("Save Return: {} Method: '{}' Class: '{}'",
+        log.info("Service Save Return: {} Method: '{}' Class: '{}'",
                 result,
                 joinPoint.getSignature(),
-                joinPoint.getThis().toString().split("@")[0]);
+                joinPoint.getSignature().getDeclaringTypeName());
     }
 
     @After("com.healthy.style.aspect.CommonJoinPointConfig.serviceDeleteLayer()")
     public void serviceDeleteLayer(JoinPoint joinPoint) {
-        log.info("Delete entity with id: {} Method: '{}' Class: '{}'",
+        log.info("Service Delete entity with id: {} Method: '{}' Class: '{}'",
                 joinPoint.getArgs(),
                 joinPoint.getSignature(),
-                joinPoint.getThis().toString().split("@")[0]);
+                joinPoint.getSignature().getDeclaringTypeName());
     }
 }
